@@ -1,43 +1,36 @@
-﻿using System.Globalization;
+﻿using System;
 
-Console.WriteLine("How many employees will be registered ?: ");
 int n = int.Parse(Console.ReadLine());
+int [,] mat = new int [n, n];
 
-List<Employees> list = new List<Employees>();
-
-for (int i = 0; i <= n; i++)
+for (int i= 0; i < n; i++)
 {
-    Console.WriteLine("Emplyoee #" + i + ":");
-    Console.Write("id:");
-    int id = int.Parse(Console.ReadLine());
-    Console.WriteLine("Name:");
-    string name = Console.ReadLine();
-    Console.Write("Salario:");
-    double salario = double.Parse(Console.ReadLine());
-    list.Add(new Employees(id, name, salario));
-    Console.WriteLine();
+    string[] values = Console.ReadLine().Split(' '); 
+   
+    for(int j = 0; j< n; j++)
+    {
+        mat[ i , j] = int.Parse(values[j]);
+         
+    }
 }
+//Saida para mostrar em diagonal" 
 
-Console.WriteLine("Enter the employee id that will have salary increase");
-int searchId = int.Parse(Console.ReadLine());
+Console.Write("Main Diagonal ");
+for (int i = 0; i < n; i++)
+{
+ 
+  Console.Write(mat[i, i] + " ");
 
-Employees emp = list.Find(x => x.Id == searchId);
-if(emp != null)
-{
-    Console.Write("Enter the percentage:");
-    double percentage = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-    emp.AumentoSalrio(percentage);
-}
-else
-{
-    Console.Write("This id does not exist!");
 
 }
 Console.WriteLine();
-Console.WriteLine("update list of employees:");
-foreach(Employees obj in list)
+int count = 0;
+for(int i = 0; i < n; i++)
 {
-    Console.WriteLine(obj);
+    for (int j = 0; j < n; j++) 
+    if(mat[i,j] < 0)
+    {
+        count++;
+    }
 }
-
-
+Console.WriteLine(" Negative Numbers " + count);
